@@ -1,0 +1,5 @@
+{
+  "name": "Klyde & Paula's Wedding",
+  "description": "A cinematic, interactive wedding website for Klyde & Paula's special day on November 20, 2026.",
+  "requestFramePermissions": ["camera"]
+}
