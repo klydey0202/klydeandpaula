@@ -5,6 +5,7 @@ import { createServer as createViteServer } from "vite";
 import Database from "better-sqlite3";
 import path from "path";
 import { fileURLToPath } from "url";
+import cors from 'cors';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -70,6 +71,18 @@ async function startServer() {
   const app = express();
   const server = createServer(app);
   const wss = new WebSocketServer({ server });
+
+  // ✅ Allow Netlify
+  app.use(cors({
+    origin: [
+      'https://klypauthewedding.netlify.app',
+      'http://localhost:5173',
+      'http://localhost:3000'
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+  }));
 
   app.use(express.json({ limit: '50mb' }));
 
