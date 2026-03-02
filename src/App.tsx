@@ -866,7 +866,7 @@ function FeedSection({ posts, onPost, hashtag }: { posts: FeedPost[], onPost: (p
                 </div>
                 <div>
                   <p className="font-bold text-stone-800">{post.name}</p>
-                  <p className="text-xs text-stone-400">{new Date(post.timestamp).toLocaleString()}</p>
+                  <p className="text-xs text-stone-400">{new Date(Number(post.timestamp)).toLocaleString()}</p>
                 </div>
               </div>
             </div>
