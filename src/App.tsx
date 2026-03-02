@@ -113,10 +113,10 @@ export default function App() {
     const fetchData = async () => {
       try {
         const [contentRes, rsvpsRes, postsRes, checkinsRes] = await Promise.all([
-          fetch('/api/content'),
-          fetch('/api/rsvps'),
-          fetch('/api/posts'),
-          fetch('/api/checkins')
+          fetch(`${import.meta.env.VITE_API_URL}/api/content`),
+          fetch(`${import.meta.env.VITE_API_URL}/api/rsvps`),
+          fetch(`${import.meta.env.VITE_API_URL}/api/posts`),
+          fetch(`${import.meta.env.VITE_API_URL}/api/checkins`)
         ]);
         
         if (contentRes.ok) setContent(await contentRes.json());
@@ -181,7 +181,7 @@ export default function App() {
       timestamp: Date.now(),
     };
     try {
-      await fetch('/api/rsvps', {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/rsvps`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(rsvp)
@@ -199,7 +199,7 @@ export default function App() {
       timestamp: Date.now(),
     };
     try {
-      await fetch('/api/posts', {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/posts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(post)
@@ -217,7 +217,7 @@ export default function App() {
       timestamp: Date.now(),
     };
     try {
-      await fetch('/api/checkins', {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/checkins`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(checkIn)
@@ -1082,7 +1082,7 @@ function AdminSection({ content, setContent, rsvps, setRsvps, isAdmin, setIsAdmi
   const updateContentField = async (key: string, value: string) => {
     const newContent = { ...content, [key]: value };
     setContent(newContent);
-    await fetch('/api/content', {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/content`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newContent)
@@ -1090,7 +1090,7 @@ function AdminSection({ content, setContent, rsvps, setRsvps, isAdmin, setIsAdmi
   };
 
   const handleUpdateRsvp = async (rsvp: RSVP) => {
-    await fetch(`/api/rsvps/${rsvp.id}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/rsvps/${rsvp.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(rsvp)
@@ -1100,7 +1100,7 @@ function AdminSection({ content, setContent, rsvps, setRsvps, isAdmin, setIsAdmi
 
   const handleDeleteRsvp = async (id: string) => {
     if (confirm("Delete this RSVP?")) {
-      await fetch(`/api/rsvps/${id}`, {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/rsvps/${id}`, {
         method: 'DELETE'
       });
     }
