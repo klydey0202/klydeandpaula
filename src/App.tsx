@@ -131,8 +131,10 @@ export default function App() {
     fetchData();
 
     // WebSocket setup
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = `${protocol}//${window.location.host}`;
+    // const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    // const wsUrl = `${protocol}//${window.location.host}`;
+    // const ws = new WebSocket(wsUrl);
+    const wsUrl = import.meta.env.VITE_WS_URL || 'ws://localhost:3001';
     const ws = new WebSocket(wsUrl);
 
     ws.onmessage = (event) => {
